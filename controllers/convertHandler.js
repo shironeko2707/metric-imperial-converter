@@ -26,7 +26,7 @@ function ConvertHandler() {
   };
   
   this.getReturnUnit = function(initUnit) {
-    const COVERT_TO = {
+    const CONVERT_TO = {
       gal : 'L',
       L : 'gal',
       mi : 'km',
@@ -35,29 +35,54 @@ function ConvertHandler() {
       kg :'lbs'
       
     };
-    return (CONVERT_TO[initUnit.toLowerCase()] === undefined) ? {"error":"invalid unit"}
-    let result;
-    
-    return result;
+    return (CONVERT_TO[initUnit.toLowerCase()] === undefined) ? {"error":"invalid unit"} : CONVERT_TO[initUnit.toLowerCase()];
+   
   };
 
   this.spellOutUnit = function(unit) {
-    let result;
-    
-    return result;
+    const UNIT_STRINGS = {
+      km: 'kilometers',
+      L: 'liters',
+      l: 'liters',
+      gal: 'gallons',
+      mi: 'miles',
+      kg: 'kilograms',
+      lbs: 'pounds'
+    }
+    return UNIT_STRINGS[unit.toLowerCase()];
   };
   
   this.convert = function(initNum, initUnit) {
-    const galToL = 3.78541;
+    const galToL = 3.785410;
     const lbsToKg = 0.453592;
     const miToKm = 1.60934;
+
     let result;
-    
-    return result;
+
+    if(initUnit.toLowerCase() === 'gal'){
+      result = galToL * initNum ; 
+    } else if(initUnit.toLowerCase() === 'l'){
+      result = parseFloat(initNum) / galToL ; 
+    } else if(initUnit.toLowerCase() === 'lbs'){
+      result = lbsToKg * parseFloat(initNum) ;
+    } else if(initUnit.toLowerCase() === 'kg'){
+      result = parseFloat(initNum) / lbsToKg ; 
+    } else if(initUnit.toLowerCase() === 'mi'){
+      result = miToKm * parseFloat(initNum) ;
+    } else if(initUnit.toLowerCase() === 'km'){
+      result = parseFloat(initNum) / miToKm ;
+    } else {
+      return 'invalid unit';
+    }    
+    return Math.round(result * 100000) / 100000;
   };
   
   this.getString = function(initNum, initUnit, returnNum, returnUnit) {
-    let result;
+    if(returnUnit.error){
+      return 'invalid unit'
+    }
+
+    let result = initNum +' '+ this.spellOutUnit(initUnit) +' converts to '+ (returnNum).toFixed(5) +' '+ this.spellOutUnit(returnUnit);
     
     return result;
   };
