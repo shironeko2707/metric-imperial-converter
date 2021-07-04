@@ -34,7 +34,8 @@ function ConvertHandler() {
       lbs :'kg',
       kg :'lbs'
       
-    }
+    };
+    return (CONVERT_TO[initUnit.toLowerCase()] === undefined) ? {"error":"invalid unit"}
     let result;
     
     return result;
