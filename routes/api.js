@@ -12,22 +12,7 @@ module.exports = function (app) {
     const numOut = convertHandler.convert(numIn, unitIn);
     const unitOut = convertHandler.getReturnUnit(unitIn);
     let returnDict = {};
-     const output = {
-      initNum,
-      initUnit,
-      returnNum,
-      returnUnit,
-      string
-    }
-    if (!initUnit && !initNum) {
-      res.send('invalid number and unit')
-    } else if (!initUnit) {
-      res.send("invalid unit")
-    } else if (!initNum) {
-      res.send('invalid number')
-    } else {
-      res.send(output);
-    }
+    
 
     if(unitOut.error != undefined && numIn.error != undefined){
       returnDict = { "error": "invalid number and unit"}
