@@ -17,9 +17,12 @@ function ConvertHandler() {
     return result[0] != undefined? parseFloat(result[0]): { "error": "invalid number"};
   };
   this.getUnit = function(input) {
-    let result;
-    
-    return result;
+    let strRegEx = /[a-z]+/ig;
+    let result = input.match(strRegEx);
+    if (result === null){
+      return {"error":"no unit given"}
+    }
+   return result[0];
   };
   
   this.getReturnUnit = function(initUnit) {
