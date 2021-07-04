@@ -26,6 +26,15 @@ function ConvertHandler() {
   };
   
   this.getReturnUnit = function(initUnit) {
+    const COVERT_TO = {
+      gal : 'L',
+      L : 'gal',
+      mi : 'km',
+      km : 'mi',
+      lbs :'kg',
+      kg :'lbs'
+      
+    }
     let result;
     
     return result;
